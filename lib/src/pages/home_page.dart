@@ -6,7 +6,6 @@ import '../widgets/bought_foods.dart';
 import '../data/food_data.dart';
 import '../models/food_model.dart';
 
-
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
 
