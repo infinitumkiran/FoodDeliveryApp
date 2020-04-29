@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
     orderPage=OrderPage();
     favpage=FavoritePage();
     propage=ProfilePage();
-    pages=[homePage,orderPage,favpage,propage];
+    pages=[homePage,favpage,orderPage,propage];
     currentPage=homePage;
   }
 
@@ -65,29 +65,30 @@ class _MainScreenState extends State<MainScreen> {
           });
 
         },
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black54,
         currentIndex: currenttabindex,
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
         icon: Icon(Icons.home),
-        activeIcon: Icon(Icons.home,color: Colors.yellow,),
+        activeIcon: Icon(Icons.home,color: Colors.orange,),
         title: Text("Home")
       
+        ),
+         BottomNavigationBarItem(
+        icon: Icon(Icons.explore),
+        activeIcon: Icon(Icons.explore,color: Colors.blue,),
+        title: Text("Explore") 
         ),
         BottomNavigationBarItem(
         icon: Icon(Icons.shopping_cart),
         activeIcon: Icon(Icons.shopping_cart,color: Colors.white70),
         title: Text("Orders")
         ),
-        BottomNavigationBarItem(
-        icon: Icon(Icons.favorite),
-        activeIcon: Icon(Icons.favorite,color: Colors.red,),
-        title: Text("Favorite") 
-        ),
+       
         BottomNavigationBarItem(
         icon: Icon(Icons.person),
-        activeIcon: Icon(Icons.person,color: Colors.blue,),
+        activeIcon: Icon(Icons.person,color: Colors.yellow,),
         title: Text("Profile")
         ),
       ]),

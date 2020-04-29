@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooddeliveryapp/src/admin/pages/add_food_item.dart';
 import 'package:fooddeliveryapp/src/scoped_model/food_model.dart';
 import 'package:fooddeliveryapp/src/scoped_model/main_model.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -20,6 +21,7 @@ class App extends StatelessWidget {
         title: 'Food Delivery App',
         theme: ThemeData(primaryColor: Colors.blueAccent),
         home: MainScreen(model:mainModel),
+        // home:AddFoodItem(),
       ),
     );
   }
