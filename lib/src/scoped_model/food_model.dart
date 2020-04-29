@@ -36,7 +36,7 @@ class FoodModel extends Model{
           fetchedfooditems.add(food);
        });
      _foods=fetchedfooditems; 
-     print(fetcheddata[0].imagePath);
+    
 
     }).catchError((error) {
       print('There is an error');
