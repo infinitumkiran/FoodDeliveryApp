@@ -7,7 +7,6 @@ class Food{
   final double discount;
   final double ratings;
 
-
   Food({this.id,this.name,this.imagePath,this.category,this.price,this.discount,this.ratings});
 
 }

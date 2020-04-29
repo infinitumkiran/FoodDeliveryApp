@@ -9,13 +9,4 @@ final foods=[
     discount:10.0,
     ratings:50.0
   ),
-    Food(
-     id:"1",
-    name:"Grilled Chicken",
-    imagePath:"assets/images/lunch.jpeg",
-    category: "2",
-    price:440.0,
-    discount:20.0,
-    ratings:90.0
-  )
 ];
