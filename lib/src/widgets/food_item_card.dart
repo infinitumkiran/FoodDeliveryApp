@@ -51,7 +51,7 @@ class FoodItemCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text("Name of item",
+                        Text("$title",
                             style: TextStyle(
                                 fontSize: 16.0, fontWeight: FontWeight.bold)),
                         SizedBox(height:5.0),
@@ -59,7 +59,7 @@ class FoodItemCard extends StatelessWidget {
                           
                           width: 220.0,
                           child: Text(
-                              "this is description of item itll be replaced by new.",
+                              "$description",
                               style: TextStyle(
                                   fontSize: 12.0, fontWeight: FontWeight.w500)),
                         ),
@@ -72,7 +72,7 @@ class FoodItemCard extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text("Rs.250/-",
+                              Text("Rs.$price/-",
                                   style: TextStyle(
                                       color: Colors.blue,
                                       fontSize: 16.0,

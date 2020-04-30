@@ -30,13 +30,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body:ListView(
-        padding: EdgeInsets.only(top:50.0,left:20.0,right:20.0),
+        padding: EdgeInsets.only(left:20.0,right:20.0),
         children:<Widget>[
          
-         SearchField(),
-         SizedBox(height:20.0),
+       
          HomeTopInfo(),
           SizedBox(height:20.0),
+            SearchField(),
+         SizedBox(height:20.0),
          FoodCategory(),
          
          SizedBox(height:20.0),

@@ -19,11 +19,12 @@ class _AddFoodItemState extends State<AddFoodItem> {
   String discount;
   String category;
   GlobalKey<FormState> _fooditemkey = GlobalKey();  
-
+  GlobalKey<FormState> _scaffoldStateKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key:_scaffoldStateKey,
       // backgroundColor: Colors.black,
       body: SingleChildScrollView(
               child: Container(
@@ -57,20 +58,10 @@ class _AddFoodItemState extends State<AddFoodItem> {
                   return  GestureDetector
                 (
                   onTap: () {
-                    if (_fooditemkey.currentState.validate()) {
-                      _fooditemkey.currentState.save();
-
-                      final Food food=Food(
-                        name: title,
-                        category: category,
-                        description:description,
-                        price:double.parse(price),
-                        discount: double.parse(discount),
-                        
-                      );
-                      model.addFood(food);
-                      
-                    }
+                     onsubmit(model.addFood);
+                     if(model.isLoading){
+                        showloadinindicator();
+                     }
                   },
                   child: Button(btnText: "Add Food Item")
                 );
@@ -83,6 +74,65 @@ class _AddFoodItemState extends State<AddFoodItem> {
       ),
     );
   }
+
+
+
+  void onsubmit(Function addFood) async
+  {
+    if (_fooditemkey.currentState.validate()) {
+                      _fooditemkey.currentState.save();
+
+                      final Food food=Food(
+                        name: title,
+                        category: category,
+                        description:description,
+                        price:double.parse(price),
+                        discount: double.parse(discount),
+                        
+                      );
+                        
+                         var value= await addFood(food);
+                         if(value){
+                           Navigator.of(context).pop();
+                           SnackBar  snackBar=SnackBar(content: 
+                           Text("Fooditem is added successfully."),
+                           );
+                         Scaffold.of(context).showSnackBar(snackBar);
+                         }
+                         else if(!value){
+                            Navigator.of(context).pop();
+                           SnackBar  snackBar=SnackBar(content: 
+                           Text("Fooditem is added successfully."),
+                           );
+                           
+                         Scaffold.of(context).showSnackBar(snackBar);
+                         }                     
+
+                    }
+ 
+  }
+
+  Future<void> showloadinindicator(){
+    return showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context){
+      return AlertDialog(
+        content: Row(
+          children: <Widget>[
+            CircularProgressIndicator(),
+            SizedBox(width: 10.0,),
+            Text("Adding food item")
+          ],
+        ),
+      );
+    }
+    );
+  }
+
+
+
+
   Widget _buildTextFormField(String hint,{int maxlines}){
     return TextFormField(
       

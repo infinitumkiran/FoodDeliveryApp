@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: Colors.black,
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 50.0),
+
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

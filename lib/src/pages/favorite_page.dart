@@ -17,22 +17,25 @@ class _FavoritePageState extends State<FavoritePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
-        body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 50.0),
-          child:ScopedModelDescendant(builder: (BuildContext context,Widget child,MainModel model){
+        body:ScopedModelDescendant(builder: (BuildContext context,Widget child,MainModel model){
             model.fetchfoods();
             List<Food>foods=model.foods;
-            return  Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: foods.map((Food food){
-              return FoodItemCard(
-                food.name,
-                food.price.toString(),
-                food.description
-              );
-            }).toList(),
-          );
-          })
-        ));
+            return  Container(
+              padding: EdgeInsets.symmetric(horizontal:20.0),
+              child: ListView(
+              children: foods.map((Food food){
+                return FoodItemCard(
+                  food.name,
+                  food.price,
+                  food.description
+                );
+              }).toList(),
+          ),
+            );
+          
+
+
+        })); 
+        
   }
 }

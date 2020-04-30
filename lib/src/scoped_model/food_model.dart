@@ -5,14 +5,24 @@ import 'package:http/http.dart' as http;
 
 class FoodModel extends Model{
   List<Food> _foods=[];
+  bool _isLoading=false;
+  bool get isLoading{
+    return _isLoading;
+
+  }
 
   List<Food>get foods{
     return List.from(_foods);
   }
 
-  void addFood(Food food) async{
+  Future<bool> addFood(Food food) async{
   //   _foods.add(food);
-  final Map<String,dynamic> fooddata={
+  _isLoading=true;
+  notifyListeners();
+
+
+try{
+    final Map<String,dynamic> fooddata={
     "title":food.name,
     "description":food.description,
     "category":food.category,
@@ -33,9 +43,18 @@ class FoodModel extends Model{
       discount:food.discount
 
     );
-      _foods.add(foodwithid);
-      print(_foods);  
-   }
+     _foods.add(foodwithid);
+      _isLoading = false;
+      notifyListeners();
+      // fetchFoods();
+      return Future.value(true);
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+      return Future.value(false);
+      print("Connection error: $e");
+    }
+  }
 
   void fetchfoods(){
     http.get("https://foody-624ca.firebaseio.com/foods.json")
@@ -78,9 +97,10 @@ class FoodModel extends Model{
           discount: double.parse(foodData["discount"].toString()),
         );
 
-        foodItems.add(foodItem);
+        foodItems.add(foodItem);  
       });
       _foods=foodItems;
+      notifyListeners();
       print(_foods);
 
 

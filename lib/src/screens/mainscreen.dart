@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooddeliveryapp/src/admin/pages/add_food_item.dart';
 import 'package:fooddeliveryapp/src/pages/order_page.dart';
 import 'package:fooddeliveryapp/src/scoped_model/food_model.dart';
 import 'package:fooddeliveryapp/src/scoped_model/main_model.dart';
@@ -47,6 +48,28 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0.0,
+        iconTheme: IconThemeData(color:Colors.white),
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              onTap:() {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context)=> AddFoodItem())
+                  );
+              },
+              leading:Icon(Icons.list),
+              title:Text("Add Food Item",style:TextStyle(fontSize:16.0))
+            )
+          ],
+        ),
+      ),
       bottomNavigationBar:new Theme(
         data: Theme.of(context).copyWith(
         // sets the background color of the `BottomNavigationBar`
