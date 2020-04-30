@@ -35,11 +35,11 @@ class _MainScreenState extends State<MainScreen> {
 
   void initState(){
     // widget.foodModel.fetchfoods();
-     widget.model.fetchfoods();
+     widget.model.fetchFoods();
     super.initState();
     homePage=HomePage();
     orderPage=OrderPage();
-    favpage=FavoritePage();
+    favpage=FavoritePage(model: widget.model);
     propage=ProfilePage();
     pages=[homePage,favpage,orderPage,propage];
     currentPage=homePage;

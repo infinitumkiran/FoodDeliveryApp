@@ -56,30 +56,70 @@ try{
     }
   }
 
-  void fetchfoods(){
-    http.get("https://foody-624ca.firebaseio.com/foods.json")
-    .then((http.Response response) {
-     print("datacheck: ${response.body}");
-     final Map<String,dynamic> fetcheddata = json.decode(response.body);
-      print(fetcheddata);
-    //  final List<Food> fetchedfooditems=[];
+  // void fetchfoods(){
+  //   http.get("https://foody-624ca.firebaseio.com/foods.json")
+  //   .then((http.Response response) {
+  //    print("datacheck: ${response.body}");
+  //    final Map<String,dynamic> fetcheddata = json.decode(response.body);
+  //     print(fetcheddata);
+  //   //  final List<Food> fetchedfooditems=[];
      
-    //   fetcheddata.forEach((val) {
+  //   //   fetcheddata.forEach((val) {
      
-    //     Food food=Food(
+  //   //     Food food=Food(
 
-    //       id:val["id"],
-    //       category: val["category_id"],
-    //       discount: double.parse(val["discount"]),
-    //       imagePath: "assets/images/"+val["image_path"],
-    //       name: val["title"],
-    //       price:double.parse(val["price"]),
-    //       // ratings: val["ratings"]
-    //     );
-    //       fetchedfooditems.add(food);
-    //    });
-    //  _foods=fetchedfooditems; 
-         http.get("https://foodie2-fe2c7.firebaseio.com/foods.json");
+  //   //       id:val["id"],
+  //   //       category: val["category_id"],
+  //   //       discount: double.parse(val["discount"]),
+  //   //       imagePath: "assets/images/"+val["image_path"],
+  //   //       name: val["title"],
+  //   //       price:double.parse(val["price"]),
+  //   //       // ratings: val["ratings"]
+  //   //     );
+  //   //       fetchedfooditems.add(food);
+  //   //    });
+  //   //  _foods=fetchedfooditems; 
+  //        http.get("https://foody-624ca.firebaseio.com/foods.json");
+
+  //     // print("Fecthing data: ${response.body}");
+  //     final Map<String, dynamic> fetchedData = json.decode(response.body);
+  //     print(fetchedData);
+
+  //     final List<Food> foodItems = [];
+
+  //     fetchedData.forEach((String id, dynamic foodData) {
+  //       Food foodItem = Food(
+  //         id: id,
+  //         name: foodData["title"],
+  //         description: foodData["description"],
+  //         category: foodData["category"],
+  //         price: double.parse(foodData["price"].toString()),
+  //         discount: double.parse(foodData["discount"].toString()),
+  //       );
+
+  //       foodItems.add(foodItem);  
+  //     });
+  //     _foods=foodItems;
+  //     notifyListeners();
+  //     print(_foods);
+
+
+
+  //   }).catchError((error) {
+  //     print('There is an error');
+     
+  //     notifyListeners();
+     
+  //   });
+  // }
+  
+  Future<bool> fetchFoods() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final http.Response response =
+          await http.get("https://foody-624ca.firebaseio.com/foods.json");
 
       // print("Fecthing data: ${response.body}");
       final Map<String, dynamic> fetchedData = json.decode(response.body);
@@ -97,20 +137,20 @@ try{
           discount: double.parse(foodData["discount"].toString()),
         );
 
-        foodItems.add(foodItem);  
+        foodItems.add(foodItem);
       });
-      _foods=foodItems;
+
+      _foods = foodItems;
+      _isLoading = false;
       notifyListeners();
-      print(_foods);
-
-
-
-    }).catchError((error) {
-      print('There is an error');
-     
+      return Future.value(true);
+    } catch (error) {
+      print("The errror: $error");
+      _isLoading = false;
       notifyListeners();
-     
-    });
+      return Future.value(false);
+    }
   }
+
 
 }

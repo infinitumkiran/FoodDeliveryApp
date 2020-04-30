@@ -6,31 +6,42 @@ import 'package:fooddeliveryapp/src/widgets/food_item_card.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class FavoritePage extends StatefulWidget {
-  FavoritePage({Key key}) : super(key: key);
+  final MainModel model;
+  FavoritePage({this.model});
 
   @override
   _FavoritePageState createState() => _FavoritePageState();
 }
 
 class _FavoritePageState extends State<FavoritePage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+     widget.model.fetchFoods();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
         body:ScopedModelDescendant(builder: (BuildContext context,Widget child,MainModel model){
-            model.fetchfoods();
+           
             List<Food>foods=model.foods;
             return  Container(
               padding: EdgeInsets.symmetric(horizontal:20.0),
-              child: ListView(
-              children: foods.map((Food food){
-                return FoodItemCard(
-                  food.name,
-                  food.price,
-                  food.description
-                );
-              }).toList(),
+              child: RefreshIndicator(
+                onRefresh:model.fetchFoods,
+                child: ListView(
+                children: foods.map((Food food){
+                  return FoodItemCard(
+                    food.name,
+                    food.price,
+                    food.description
+                  );
+                }).toList(),
           ),
+              ),
             );
           
 
